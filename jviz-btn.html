@@ -1,0 +1,110 @@
+<!--
+@license
+Copyright (c) 2016 The Jviz Project Authors. All rights reserved.
+The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob/dev/LICENSE
+-->
+
+<!-- Component -->
+<dom-module id="jviz-btn">
+  <template>
+    <!-- Template style -->
+    <style>
+      /* Button variables */
+      :host
+      {
+        /* Button color */
+        --jviz-btn-color-background: var(--jviz-blue);
+
+        /* Button text */
+        --jviz-btn-color-text: var(--jviz-blue-over);
+      }
+
+      /* Default button style */
+      :host
+      {
+        /* Include button */
+        @apply(--jviz-btn);
+
+        /* Background color */
+        background-color: var(--jviz-btn-color-background);
+
+        /* Text color */
+        color: var(--jviz-btn-color-text);
+      }
+
+      /* Button hover */
+      :host:hover { @apply(--jviz-btn-hover); }
+
+      /* Button disabled */
+      :host[btn-disabled]{ @apply(--jviz-btn-disabled); }
+    </style>
+    <!-- Template content -->
+    <content></content>
+  </template>
+</dom-module>
+
+<!-- Button logic -->
+<script>
+
+//Button component
+jviz.components.btn = { is: 'jviz-btn' };
+
+//Button properties
+jviz.components.btn.properties = {};
+jviz.components.btn.properties.btnColor = { type: String, value: 'blue', reflectToAttribute: true, observer: 'update_color' };
+jviz.components.btn.properties.btnDisabled = { type: Boolean, value: false, reflectToAttribute: true, observer: 'update_disabled' };
+
+//Update the button color
+jviz.components.btn.update_color = function(new_value, old_value)
+{
+  //Update the button background color
+  this.customStyle['--jviz-btn-color-background'] = 'var(--jviz-' + new_value + ')';
+
+  //Update the button text color
+  this.customStyle['--jviz-btn-color-text'] = 'var(--jviz-' + new_value + '-over)';
+
+  //Update the styles
+  this.updateStyles();
+};
+
+//Set the color value
+jviz.components.btn.set_color = function(value)
+{
+  //Update the button color
+  this.btnColor = value;
+};
+
+//Get the button color
+jviz.components.btn.get_color = function()
+{
+  //Return the color
+  return this.btnColor;
+};
+
+//Update the disabled button
+jviz.components.btn.update_disabled = function(new_value, old_value)
+{
+  //Button dis disabed/enabled
+};
+
+//Set disabled
+jviz.components.btn.set_disabled = function(value)
+{
+  //Check for boolean
+  if(typeof value !== 'boolean'){ return; }
+
+  //Add the disabled option
+  this.btnDisabled = value;
+};
+
+//Check if button is disabled
+jviz.components.btn.get_disabled = function()
+{
+  //Return if is disabled
+  return this.btnDisabled;
+};
+
+</script>
+
+<!-- Initialize the element -->
+<script> Polymer(jviz.components.btn); </script>
