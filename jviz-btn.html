@@ -4,11 +4,17 @@ Copyright (c) 2016 The Jviz Project Authors. All rights reserved.
 The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob/dev/LICENSE
 -->
 
+<!-- Import components -->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../jviz/jviz.html">
+<link rel="import" href="../jviz-styles/jviz-styles.html">
+
 <!-- Component -->
 <dom-module id="jviz-btn">
   <template>
     <!-- Template style -->
     <style>
+
       /* Button variables */
       :host
       {
@@ -22,13 +28,8 @@ The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob
       /* Default button style */
       :host
       {
-        /* Include button */
         @apply(--jviz-btn);
-
-        /* Background color */
         background-color: var(--jviz-btn-color-background);
-
-        /* Text color */
         color: var(--jviz-btn-color-text);
       }
 
@@ -37,6 +38,7 @@ The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob
 
       /* Button disabled */
       :host[btn-disabled]{ @apply(--jviz-btn-disabled); }
+      
     </style>
     <!-- Template content -->
     <content></content>
