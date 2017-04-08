@@ -53,17 +53,17 @@ var jviz_btn = { is: 'jviz-btn' };
 
 //Button properties
 jviz_btn.properties = {};
-jviz_btn.properties.btnColor = { type: String, value: 'blue', reflectToAttribute: true, observer: 'update_color' };
-jviz_btn.properties.btnDisabled = { type: Boolean, value: false, reflectToAttribute: true, observer: 'update_disabled' };
+jviz_btn.properties.color = { type: String, value: 'blue', reflectToAttribute: true, observer: '_update_color' };
+jviz_btn.properties.disabled = { type: Boolean, value: false, reflectToAttribute: true, observer: '_update_disabled' };
 
 //Update the button color
-jviz_btn.update_color = function(new_value, old_value)
+jviz_btn._update_color = function(value)
 {
   //Update the button background color
-  this.customStyle['--jviz-btn-color-background'] = 'var(--jviz-' + new_value + ')';
+  this.customStyle['--jviz-btn-color-background'] = 'var(--jviz-' + value + ')';
 
   //Update the button text color
-  this.customStyle['--jviz-btn-color-text'] = 'var(--jviz-' + new_value + '-over)';
+  this.customStyle['--jviz-btn-color-text'] = 'var(--jviz-' + value + '-over)';
 
   //Update the styles
   this.updateStyles();
@@ -84,7 +84,7 @@ jviz_btn.get_color = function()
 };
 
 //Update the disabled button
-jviz_btn.update_disabled = function(new_value, old_value)
+jviz_btn._update_disabled = function(value)
 {
   //Button dis disabed/enabled
 };
