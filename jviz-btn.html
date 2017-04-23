@@ -8,6 +8,7 @@ The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../jviz/jviz.html">
 <link rel="import" href="../jviz-styles/jviz-styles.html">
+<link rel="import" href="../jviz-icons/jviz-icons.html">
 
 <!-- Component -->
 <dom-module id="jviz-btn">
@@ -61,13 +62,56 @@ The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob
         cursor: not-allowed !important;
       }
 
+      /* Button icon */
+      :host .btn-icon
+      {
+        display: none;
+      }
+
+      /* Button icon active */
+      :host[icon]
+      {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+      }
+
+      /* Button icon active */
+      :host[icon] .btn-icon
+      {
+        display: inline-block;
+        float: left;
+      }
+
+      /* Button text */
+      :host .btn-text
+      {
+        width: 100%;
+        height: var(--jviz-btn--height);
+        display: inline-block;
+        line-height: var(--jviz-btn--height);
+        float: right;
+      }
+
+      /* Button test */
+      :host[icon] .btn-text
+      {
+        width: calc(100% - var(--jviz-btn--height) - 15px);
+        padding-right: 10px;
+        padding-left: 5px;
+      }
+
       /* Button with width */
       :host[width]
       {
         width: calc(var(--jviz-btn--width) - var(--jviz-btn--padding));
       }
     </style>
-    {{ text }}
+    <template is="dom-if" if="{{ icon }}">
+      <jviz-icons class="btn-icon" icon$="{{ icon }}" color$="{{ color }}" size$="{{ height }}" reflect></jviz-icons>
+    </template>
+    <template is="dom-if" if="{{ text }}">
+      <div class="btn-text">{{ text }}</div>
+    </template>
   </template>
 </dom-module>
 
@@ -79,11 +123,12 @@ The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob
   //Button properties
   jviz_btn.properties = {};
   jviz_btn.properties.width = { type: String, reflectToAttribute: true, observer: '_update_width' };
-  jviz_btn.properties.height = { type: String, reflectToAttribute: true, observer: '_update_height' };
+  jviz_btn.properties.height = { type: String, reflectToAttribute: true, observer: '_update_height', value: '30px' };
   jviz_btn.properties.font = { type: String, reflectToAttribute: true, observer: '_update_font' };
   jviz_btn.properties.color = { type: String, value: 'blue', reflectToAttribute: true, observer: '_update_color' };
   jviz_btn.properties.disabled = { type: Boolean, value: false, reflectToAttribute: true };
   jviz_btn.properties.text = { type: String, reflectToAttribute: true };
+  jviz_btn.properties.icon = { type: String, reflectToAttribute: true };
 
   //Update the button width
   jviz_btn._update_width = function(value)
