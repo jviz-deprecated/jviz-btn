@@ -67,70 +67,67 @@ The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob
         width: calc(var(--jviz-btn--width) - var(--jviz-btn--padding));
       }
     </style>
-    <!-- Button text -->
     {{ text }}
   </template>
 </dom-module>
 
 <!-- Button logic -->
 <script>
+  //Button component
+  var jviz_btn = { is: 'jviz-btn' };
 
-//Button component
-var jviz_btn = { is: 'jviz-btn' };
+  //Button properties
+  jviz_btn.properties = {};
+  jviz_btn.properties.width = { type: String, reflectToAttribute: true, observer: '_update_width' };
+  jviz_btn.properties.height = { type: String, reflectToAttribute: true, observer: '_update_height' };
+  jviz_btn.properties.font = { type: String, reflectToAttribute: true, observer: '_update_font' };
+  jviz_btn.properties.color = { type: String, value: 'blue', reflectToAttribute: true, observer: '_update_color' };
+  jviz_btn.properties.disabled = { type: Boolean, value: false, reflectToAttribute: true };
+  jviz_btn.properties.text = { type: String, reflectToAttribute: true };
 
-//Button properties
-jviz_btn.properties = {};
-jviz_btn.properties.width = { type: String, reflectToAttribute: true, observer: '_update_width' };
-jviz_btn.properties.height = { type: String, reflectToAttribute: true, observer: '_update_height' };
-jviz_btn.properties.font = { type: String, reflectToAttribute: true, observer: '_update_font' };
-jviz_btn.properties.color = { type: String, value: 'blue', reflectToAttribute: true, observer: '_update_color' };
-jviz_btn.properties.disabled = { type: Boolean, value: false, reflectToAttribute: true };
-jviz_btn.properties.text = { type: String, reflectToAttribute: true };
-
-//Update the button width
-jviz_btn._update_width = function(value)
-{
   //Update the button width
-  this.customStyle['--jviz-btn--width'] = value;
+  jviz_btn._update_width = function(value)
+  {
+    //Update the button width
+    this.customStyle['--jviz-btn--width'] = value;
 
-  //Update the styles
-  this.updateStyles();
-};
+    //Update the styles
+    this.updateStyles();
+  };
 
-//Update the button height
-jviz_btn._update_height = function(value)
-{
   //Update the button height
-  this.customStyle['--jviz-btn--height'] = value;
+  jviz_btn._update_height = function(value)
+  {
+    //Update the button height
+    this.customStyle['--jviz-btn--height'] = value;
 
-  //Update the styles
-  this.updateStyles();
-};
+    //Update the styles
+    this.updateStyles();
+  };
 
-//Update the button font size
-jviz_btn._update_font = function(value)
-{
   //Update the button font size
-  this.customStyle['--jviz-btn--font'] = value;
+  jviz_btn._update_font = function(value)
+  {
+    //Update the button font size
+    this.customStyle['--jviz-btn--font'] = value;
 
-  //Update the styles
-  this.updateStyles();
-};
+    //Update the styles
+    this.updateStyles();
+  };
 
-//Update the button color
-jviz_btn._update_color = function(value)
-{
-  //Update the button background color
-  this.customStyle['--jviz-btn--color-background'] = 'var(--jviz-' + value + ')';
+  //Update the button color
+  jviz_btn._update_color = function(value)
+  {
+    //Update the button background color
+    this.customStyle['--jviz-btn--color-background'] = 'var(--jviz-' + value + ')';
 
-  //Update the button text color
-  this.customStyle['--jviz-btn--color-text'] = 'var(--jviz-' + value + '-over)';
+    //Update the button text color
+    this.customStyle['--jviz-btn--color-text'] = 'var(--jviz-' + value + '-over)';
 
-  //Update the styles
-  this.updateStyles();
-};
+    //Update the styles
+    this.updateStyles();
+  };
 
-//Register the button element
-Polymer(jviz_btn);
-
+  //Register the button element
+  Polymer(jviz_btn);
 </script>
