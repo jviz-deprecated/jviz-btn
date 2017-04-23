@@ -15,29 +15,56 @@ The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob
     <style>
       :host
       {
-        --jviz-btn---color-background: var(--jviz-blue);
-        --jviz-btn---color-text: var(--jviz-blue-over);
-        --jviz-btn---width: 0px;
+        --jviz-btn--color-background: var(--jviz-blue);
+        --jviz-btn--color-text: var(--jviz-blue-over);
+        --jviz-btn--padding: 10px;
+        --jviz-btn--font: 14px;
+        --jviz-btn--width: 0px;
+        --jviz-btn--height: 30px;
       }
 
       /* Default button style */
       :host
       {
-        @apply(--jviz-btn);
-        background-color: var(--jviz-btn---color-background);
-        color: var(--jviz-btn---color-text);
+        display: inline-block;
+        cursor: pointer;
+        height: var(--jviz-btn--height);
+        line-height: var(--jviz-btn--height);
+        background-color: var(--jviz-btn--color-background);
+        color: var(--jviz-btn--color-text);
+        text-align: center;
+        text-decoration: none !important;
+        font-family: var(--jviz-font-family);
+        font-size: var(--jviz-btn--font);
+        font-weight: bold;
+        padding-left: var(--jviz-btn--padding);
+        padding-right: var(--jviz-btn--padding);
+        border-radius: 5px;
+        transition: opacity 0.3s;
+
+        /* Disable button selection */
+        @apply(--jviz-no-select);
       }
 
       /* Button hover */
-      :host:hover { @apply(--jviz-btn-hover); }
+      :host:hover
+      {
+        opacity: 0.8;
+        text-decoration: none;
+      }
 
       /* Button disabled */
-      :host[disabled]{ @apply(--jviz-btn-disabled); }
+      :host[disabled]
+      {
+        background-color: var(--jviz-grey-0) !important;
+        color: var(--jviz-navy-2) !important;
+        cursor: not-allowed !important;
+      }
 
       /* Button with width */
       :host[width]
       {
-        width: calc(var(--jviz-btn---width) - var(--jviz-btn--padding));
+        width: calc(var(--jviz-btn--width) - var(--jviz-btn--padding));
       }
     </style>
     <!-- Button text -->
@@ -54,6 +81,8 @@ var jviz_btn = { is: 'jviz-btn' };
 //Button properties
 jviz_btn.properties = {};
 jviz_btn.properties.width = { type: String, reflectToAttribute: true, observer: '_update_width' };
+jviz_btn.properties.height = { type: String, reflectToAttribute: true, observer: '_update_height' };
+jviz_btn.properties.font = { type: String, reflectToAttribute: true, observer: '_update_font' };
 jviz_btn.properties.color = { type: String, value: 'blue', reflectToAttribute: true, observer: '_update_color' };
 jviz_btn.properties.disabled = { type: Boolean, value: false, reflectToAttribute: true };
 jviz_btn.properties.text = { type: String, reflectToAttribute: true };
@@ -62,7 +91,27 @@ jviz_btn.properties.text = { type: String, reflectToAttribute: true };
 jviz_btn._update_width = function(value)
 {
   //Update the button width
-  this.customStyle['--jviz-btn---width'] = value;
+  this.customStyle['--jviz-btn--width'] = value;
+
+  //Update the styles
+  this.updateStyles();
+};
+
+//Update the button height
+jviz_btn._update_height = function(value)
+{
+  //Update the button height
+  this.customStyle['--jviz-btn--height'] = value;
+
+  //Update the styles
+  this.updateStyles();
+};
+
+//Update the button font size
+jviz_btn._update_font = function(value)
+{
+  //Update the button font size
+  this.customStyle['--jviz-btn--font'] = value;
 
   //Update the styles
   this.updateStyles();
@@ -72,10 +121,10 @@ jviz_btn._update_width = function(value)
 jviz_btn._update_color = function(value)
 {
   //Update the button background color
-  this.customStyle['--jviz-btn---color-background'] = 'var(--jviz-' + value + ')';
+  this.customStyle['--jviz-btn--color-background'] = 'var(--jviz-' + value + ')';
 
   //Update the button text color
-  this.customStyle['--jviz-btn---color-text'] = 'var(--jviz-' + value + '-over)';
+  this.customStyle['--jviz-btn--color-text'] = 'var(--jviz-' + value + '-over)';
 
   //Update the styles
   this.updateStyles();
