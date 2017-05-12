@@ -81,6 +81,10 @@ The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob
         display: inline-block;
         float: left;
       }
+      :host[icon-align="right"] .btn-icon
+      {
+        float: right !important;
+      }
 
       /* Button text */
       :host .btn-text
@@ -129,6 +133,7 @@ The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob
   jviz_btn.properties.disabled = { type: Boolean, value: false, reflectToAttribute: true };
   jviz_btn.properties.text = { type: String, reflectToAttribute: true };
   jviz_btn.properties.icon = { type: String, reflectToAttribute: true };
+  jviz_btn.properties.iconAlign = { type: String, reflectToAttribute: true, value: 'left' };
 
   //Update the button width
   jviz_btn._update_width = function(value)
