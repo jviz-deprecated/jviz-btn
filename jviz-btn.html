@@ -81,7 +81,7 @@ The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob
         display: inline-block;
         float: left;
       }
-      :host[icon-align="right"] .btn-icon
+      :host[icon][icon-align="right"] .btn-icon
       {
         float: right !important;
       }
@@ -102,6 +102,11 @@ The Jviz Project is under the MIT License. See https://github.com/jviz/jviz/blob
         width: calc(100% - var(--jviz-btn--height) - 15px);
         padding-right: 10px;
         padding-left: 5px;
+      }
+      :host[icon][icon-align="right"] .btn-text
+      {
+        padding-right: 5px !important;
+        padding-left: 10px !important;
       }
 
       /* Button with width */
